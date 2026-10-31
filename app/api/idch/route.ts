@@ -21,7 +21,7 @@ const DEFAULT_DATA: ChannelUser[] = [
 let memoryStore: ChannelUser[] = [...DEFAULT_DATA];
 
 function getFilePath(): string {
-  return path.join(process.cwd(), 'public', 'idch.json');
+  return path.join(process.cwd(), 'data', 'idch.json');
 }
 
 function readStoredData(): ChannelUser[] {

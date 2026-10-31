@@ -34,8 +34,6 @@ export default function CreatePage() {
   ]);
   const [mergedDatabase, setMergedDatabase] = useState<ChannelUser[]>([]);
   const [isCopied, setIsCopied] = useState(false);
-  const [isSavedLive, setIsSavedLive] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Fetch initial /idch.json data on mount with cache-busting
   useEffect(() => {
@@ -127,38 +125,6 @@ ${jsonString}
 
 Mohon di-add manual ya min. Terima kasih!`;
     return encodeURIComponent(text);
-  };
-
-  const handleSaveToApi = async () => {
-    if (!cleanName || rawList.length === 0) {
-      alert('Harap isi Nama dan minimal satu ID Channel!');
-      return;
-    }
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/idch', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: cleanName,
-          idch: rawList,
-        }),
-      });
-      const result = await res.json();
-      if (res.ok && result.data) {
-        setCurrentDatabase(result.data);
-        setIsSavedLive(true);
-        setTimeout(() => setIsSavedLive(false), 3000);
-      } else {
-        alert(result.error || 'Gagal menyimpan data.');
-      }
-    } catch (err) {
-      alert('Terjadi kesalahan saat menghubungi API.');
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -570,22 +536,6 @@ Mohon di-add manual ya min. Terima kasih!`;
               >
                 {isCopied ? <CheckIcon /> : <ClipboardIcon />}
                 <span>{isCopied ? 'Tersalin ke Clipboard!' : 'Salin JSON'}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleSaveToApi}
-                disabled={isSubmitting}
-                className="btn-primary"
-                style={{
-                  width: '100%',
-                  height: '40px',
-                  borderRadius: 'var(--radius-full)',
-                  opacity: isSubmitting ? 0.6 : 1,
-                }}
-              >
-                <DatabaseIcon />
-                <span>{isSavedLive ? 'Berhasil Diupdate ke /idch.json!' : 'Simpan Langsung ke Web'}</span>
               </button>
             </div>
           </div>
