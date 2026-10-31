@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Colors */
+  --color-background: #0a0a0a;
+  --color-surface: #272727;
+  --color-surface-muted: #3f3f46;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #00fa9a;
+  --color-text-muted: #dadada;
+  --color-border: #272727;
+  --color-primary: #0a84ff;
+  --color-secondary: #00fa9a;
+  --color-primary-hover: #3399ff;
+  --color-success: #00fa9a;
+  --color-info: #0a84ff;
+
+  /* Palette extensions recorded from spec */
+  --color-surface-card: #18181b;
+  --color-border-card: #ffffff;
+  --color-border-accent: #00fa9a;
+  --color-button-outline-text: #494949;
+  --color-button-primary-text: #09090b;
+
+  /* Gradients */
+  --gradient-radial: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0));
+  --gradient-heading: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.6));
+  --gradient-card: linear-gradient(to right bottom, #3f3f46, #18181b);
+  --gradient-divider: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0));
+
+  /* Typography */
+  --font-body: 'Geist', sans-serif;
+  --font-heading: 'Geist', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --font-size-display: 72px;
+  --font-size-h2: 36px;
+  --font-size-h1: 16px;
+  --font-size-small: 11.5px;
+
+  /* Spacing */
+  --spacing-3xs: 4px;
+  --spacing-2xs: 8px;
+  --spacing-xs: 12px;
+  --spacing-sm: 16px;
+  --spacing-md: 20px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 36px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 56px;
+  --spacing-5xl: 80px;
+  --spacing-section: 80px;
+  --container-max-width: 1090px;
+  --container-padding: 32px;
+
+  /* Radius */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-h1);
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  width: 100%;
+}
+
+/* Animations */
+@keyframes moveClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(20px); }
+}
+
+@keyframes speeder {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* Transition utility */
+.transition-standard {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-text-primary);
+  color: var(--color-button-primary-text);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  height: 32px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2xs);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-text-primary);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  height: 48px;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2xs);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  color: var(--color-secondary);
+  border: 2px solid var(--color-secondary);
+  font-size: 15px;
+  font-weight: 600;
+  height: 48px;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2xs);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+}
+
+/* Cards */
+.card-surface {
+  background: var(--gradient-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-surface:hover {
+  border-color: var(--color-border-card);
+}
+
+.card-surface-lg {
+  background: var(--gradient-card);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grids */
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-md);
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 900px) {
+  .grid-3col,
+  .grid-4col {
+    grid-template-columns: 1fr;
+  }
+}
