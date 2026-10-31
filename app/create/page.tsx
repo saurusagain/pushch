@@ -347,7 +347,47 @@ Mohon di-add manual ya min. Terima kasih!`;
               gap: 'var(--spacing-md)',
             }}
           >
-            <h3 style={{ fontSize: 'var(--font-size-h1)', fontWeight: 600 }}>Input Data Channel</h3>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h3 style={{ fontSize: 'var(--font-size-h1)', fontWeight: 600 }}>Input Data Channel</h3>
+              <div style={{ display: 'flex', gap: 'var(--spacing-3xs)' }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setName('saurus');
+                    setIdchInput('120363499999999999@newsletter');
+                  }}
+                  style={{
+                    backgroundColor: 'var(--color-background)',
+                    border: '1px solid var(--color-border)',
+                    color: 'var(--color-text-muted)',
+                    fontSize: 'var(--font-size-small)',
+                    padding: 'var(--spacing-3xs) var(--spacing-2xs)',
+                    borderRadius: 'var(--radius-xs)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  + Demo Merge (saurus)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setName('udin');
+                    setIdchInput('120363411111111111@newsletter\n120363422222222222@newsletter');
+                  }}
+                  style={{
+                    backgroundColor: 'var(--color-background)',
+                    border: '1px solid var(--color-secondary)',
+                    color: 'var(--color-secondary)',
+                    fontSize: 'var(--font-size-small)',
+                    padding: 'var(--spacing-3xs) var(--spacing-2xs)',
+                    borderRadius: 'var(--radius-xs)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  + Demo Baru (udin)
+                </button>
+              </div>
+            </div>
 
             {/* Field 1: Nama */}
             <div>
@@ -555,3 +595,4 @@ Mohon di-add manual ya min. Terima kasih!`;
     </div>
   );
 }
+
