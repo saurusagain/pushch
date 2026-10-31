@@ -17,3 +17,4 @@ Captured from astralune.cv design system analysis:
 4. **Data Persistence Strategy on Serverless**
    - Marker: `TODO(spec): storage backend for /idch.json in production (e.g. Vercel KV, Blob, or GitHub API)`
    - Detail: Local updates work in-memory and client localStorage; production Vercel serverless functions are stateless, manual WhatsApp verification flow by Admin (62895639043495) handles permanent additions.
+

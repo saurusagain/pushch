@@ -37,9 +37,9 @@ export default function CreatePage() {
   const [isSavedLive, setIsSavedLive] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Fetch initial /idch.json data on mount
+  // Fetch initial /idch.json data on mount with cache-busting
   useEffect(() => {
-    fetch('/api/idch')
+    fetch(`/api/idch?t=${Date.now()}`, { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
@@ -347,45 +347,117 @@ Mohon di-add manual ya min. Terima kasih!`;
               gap: 'var(--spacing-md)',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 style={{ fontSize: 'var(--font-size-h1)', fontWeight: 600 }}>Input Data Channel</h3>
-              <div style={{ display: 'flex', gap: 'var(--spacing-3xs)' }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setName('saurus');
-                    setIdchInput('120363499999999999@newsletter');
-                  }}
-                  style={{
-                    backgroundColor: 'var(--color-background)',
-                    border: '1px solid var(--color-border)',
-                    color: 'var(--color-text-muted)',
-                    fontSize: 'var(--font-size-small)',
-                    padding: 'var(--spacing-3xs) var(--spacing-2xs)',
-                    borderRadius: 'var(--radius-xs)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  + Demo Merge (saurus)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setName('udin');
-                    setIdchInput('120363411111111111@newsletter\n120363422222222222@newsletter');
-                  }}
-                  style={{
-                    backgroundColor: 'var(--color-background)',
-                    border: '1px solid var(--color-secondary)',
-                    color: 'var(--color-secondary)',
-                    fontSize: 'var(--font-size-small)',
-                    padding: 'var(--spacing-3xs) var(--spacing-2xs)',
-                    borderRadius: 'var(--radius-xs)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  + Demo Baru (udin)
-                </button>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--spacing-2xs)', marginBottom: 'var(--spacing-xs)' }}>
+                <h3 style={{ fontSize: 'var(--font-size-h1)', fontWeight: 600 }}>Input Data Channel</h3>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-3xs)' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setName('udin');
+                      setIdchInput('120363411111111111@newsletter\n120363422222222222@newsletter');
+                    }}
+                    style={{
+                      backgroundColor: 'var(--color-background)',
+                      border: '1px solid var(--color-secondary)',
+                      color: 'var(--color-secondary)',
+                      fontSize: 'var(--font-size-small)',
+                      padding: 'var(--spacing-3xs) var(--spacing-2xs)',
+                      borderRadius: 'var(--radius-xs)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    + Contoh 1: udin
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Simulate having both saurus and udin first, then adding bagong
+                      setCurrentDatabase([
+                        {
+                          name: 'saurus',
+                          idch: [
+                            '120363418964199743@newsletter',
+                            '120363429190136593@newsletter',
+                          ],
+                        },
+                        {
+                          name: 'udin',
+                          idch: [
+                            '120363411111111111@newsletter',
+                            '120363422222222222@newsletter',
+                          ],
+                        },
+                      ]);
+                      setName('bagong');
+                      setIdchInput('120363433333333333@newsletter\n120363444444444444@newsletter');
+                    }}
+                    style={{
+                      backgroundColor: 'var(--color-background)',
+                      border: '1px solid var(--color-primary)',
+                      color: 'var(--color-primary)',
+                      fontSize: 'var(--font-size-small)',
+                      padding: 'var(--spacing-3xs) var(--spacing-2xs)',
+                      borderRadius: 'var(--radius-xs)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    + Contoh 2: bagong
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setName('saurus');
+                      setIdchInput('120363499999999999@newsletter');
+                    }}
+                    style={{
+                      backgroundColor: 'var(--color-background)',
+                      border: '1px solid var(--color-border)',
+                      color: 'var(--color-text-muted)',
+                      fontSize: 'var(--font-size-small)',
+                      padding: 'var(--spacing-3xs) var(--spacing-2xs)',
+                      borderRadius: 'var(--radius-xs)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    + Contoh Merge: saurus
+                  </button>
+                </div>
+              </div>
+
+              {/* Current registered database chips */}
+              <div
+                style={{
+                  padding: 'var(--spacing-2xs) var(--spacing-sm)',
+                  backgroundColor: 'var(--color-background)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-sm)',
+                  marginBottom: 'var(--spacing-sm)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: 'var(--spacing-2xs)',
+                }}
+              >
+                <span style={{ fontSize: 'var(--font-size-small)', color: 'var(--color-text-muted)' }}>
+                  User terdaftar di /idch.json saat ini:
+                </span>
+                {currentDatabase.map((u, i) => (
+                  <span
+                    key={u.name}
+                    className="font-mono"
+                    style={{
+                      fontSize: 'var(--font-size-small)',
+                      color: 'var(--color-text-primary)',
+                      backgroundColor: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      padding: '2px var(--spacing-2xs)',
+                      borderRadius: 'var(--radius-xs)',
+                    }}
+                  >
+                    #{i + 1} {u.name} ({u.idch.length} CH)
+                  </span>
+                ))}
               </div>
             </div>
 

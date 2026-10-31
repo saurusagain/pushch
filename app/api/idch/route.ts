@@ -67,6 +67,26 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
+    // Support direct full array update (Admin replacement)
+    if (Array.isArray(body)) {
+      writeStoredData(body);
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Database /idch.json berhasil diperbarui secara penuh.',
+          data: body,
+        },
+        {
+          status: 200,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-store, max-age=0',
+          },
+        }
+      );
+    }
+
     const { name, idch } = body;
 
     if (!name || typeof name !== 'string') {
@@ -153,3 +173,4 @@ export async function OPTIONS() {
     },
   });
 }
+
